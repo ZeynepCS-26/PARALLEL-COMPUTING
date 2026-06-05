@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "userProfile": {
+      "title": "User Profile",
+      "description": "Public and private settings for a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "isPublic": { "type": "boolean" },
+        "createdAt": { "type": "number", "description": "Timestamp" }
+      },
+      "required": ["userId", "name", "isPublic"]
+    },
+    "task": {
+      "title": "Completed Task",
+      "description": "A saved simulation task from the workspace",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "code": { "type": "string" },
+        "simulationResult": { "type": "string" },
+        "completedAt": { "type": "number", "description": "Timestamp" }
+      },
+      "required": ["title", "description", "code", "simulationResult", "completedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/userProfile" },
+      "description": "User profile document"
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/task" },
+      "description": "Tasks completed by the user"
+    }
+  }
+}
